@@ -8,55 +8,69 @@ import os
 # Create your views here.
 
 def home(request):
+
 	images = IndexImage.objects.filter(active=1).order_by('-id')[:4]
 	notices = Notice.objects.filter().order_by('-id')[:10]
 	events = Event.objects.filter().order_by('-id')[:2]
 	template = 'schools/index.html'
 	context = {'all_images': images, 'all_notices':notices,'all_events':events}
 	return render(request, template, context)
-
+	
 
 
 
 #About Views
 
 def about_introduction(request):
-	images = IndexImage.objects.filter(active=1)[:1]
-	template = 'schools/about_introduction.html'
-	context = {'all_images':images}
-	return render(request,template,context)
+	try:
+		images = IndexImage.objects.filter(active=1)[:1]
+		template = 'schools/about_introduction.html'
+		context = {'all_images':images}
+		return render(request,template,context)
+	except:
+		raise Http404("Page Not Found")
 
 
 def about_boardofdirectors(request):
-	directors = BoardofDirector.objects.all()
-	template = 'schools/about_boardofdirectors.html'
-	context = {'all_directors':directors}
-	return render(request, template, context)
+	try:
+		directors = BoardofDirector.objects.all()
+		template = 'schools/about_boardofdirectors.html'
+		context = {'all_directors':directors}
+		return render(request, template, context)
+	except:
+		raise Http404("Page Not Found")
+
 
 
 def about_staffs(request):
-	staffs = Teacher.objects.all()
-	template = 'schools/about_staffs.html'
-	context = {'all_staffs':staffs}
-	return render(request, template, context)
+	try:
+		staffs = Teacher.objects.all()
+		template = 'schools/about_staffs.html'
+		context = {'all_staffs':staffs}
+		return render(request, template, context)
+	except:
+		raise Http404("Page Not Found")
 
 
 
 
 #Event Vies
 def event(request):
-	events = Event.objects.all().order_by('-id')
-	page = request.GET.get('page', 1)
-	paginator = Paginator(events,2)
-	template = 'schools/event.html'
 	try:
-		data = paginator.page(page)
-	except PageNotAnInteger:
-		data = paginator.page(1)
-	except EmptyPage:
-		data = paginator.page(paginator.num_pages)
-	
-	return render(request,template,{'all_events':data})
+		events = Event.objects.all().order_by('-id')
+		page = request.GET.get('page', 1)
+		paginator = Paginator(events,2)
+		template = 'schools/event.html'
+		try:
+			data = paginator.page(page)
+		except PageNotAnInteger:
+			data = paginator.page(1)
+		except EmptyPage:
+			data = paginator.page(paginator.num_pages)
+		
+		return render(request,template,{'all_events':data})
+	except:
+		raise Http404("Page Not Found")
 
 
 def notice(request):
@@ -121,11 +135,14 @@ def contact(request):
 
 
 def single_event(request,id):
-	event = Event.objects.get(id=id)
-	all_events = Event.objects.filter().exclude(id=id).order_by('-id')[:3]
-	template = 'schools/single-event.html'
-	context = {'single_event':event,'all_events':all_events}
-	return render(request,template,context)
+	try:
+		event = Event.objects.get(id=id)
+		all_events = Event.objects.filter().exclude(id=id).order_by('-id')[:3]
+		template = 'schools/single-event.html'
+		context = {'single_event':event,'all_events':all_events}
+		return render(request,template,context)
+	except:
+		raise Http404("Page Not Found")
 
 
 def single_notice(request,id):
@@ -140,5 +157,5 @@ def single_notice(request,id):
 		print(filepath)
 		return FileResponse(open(filepath, 'rb'), content_type='application/pdf')
 	except FileNotFoundError:
-		return HttpResponse("Not found")
+		return HttpResponse(" Page Not found")
 
