@@ -1,0 +1,67 @@
+{% extends 'base.html' %}
+
+{% block title%}
+	Notices
+{% endblock%}
+
+{% block content %}
+
+	<!-- Courses section -->
+	<section class="full-courses-section spad pt-0">
+		<br>
+		<div class="container">
+			<h2>Notices</h2>
+			<br>
+			
+				<!-- course item -->
+			
+			{% for notice in all_notices%}
+
+			<ul>
+				<li><a href='{{ notice.notice_file.url}}'>{{notice.notice_title}}, - {{notice.datepublished}}</a></li>
+			</ul>
+				
+				{% endfor %}
+			
+			</div>
+
+
+			<br><br>
+			<div class="text-center">
+				{% if all_notices.has_other_pages %}
+  			<ul class="site-pageination">
+			    {% if all_notices.has_previous %}
+			      <li><a href="?page={{ all_notices.previous_page_number }}">&laquo;</a></li>
+			    {% else %}
+			      <li class="disabled"><span>&laquo;</span></li>
+			    {% endif %}
+			    {% for i in all_notices.paginator.page_range %}
+			      {% if all_notices.number == i %}
+			        <li class="active"><span>{{ i }} <span class="sr-only">(current)</span></span></li>
+			      {% else %}
+			        <li><a href="?page={{ i }}">{{ i }}</a></li>
+			      {% endif %}
+			    {% endfor %}
+			    {% if all_notices.has_next %}
+			      <li><a href="?page={{ all_notices.next_page_number }}">&raquo;</a></li>
+			    {% else %}
+			      <li class="disabled"><span>&raquo;</span></li>
+			    {% endif %}
+			  </ul>
+			{% endif %}
+			</div>
+
+
+
+
+
+
+			
+		
+	</section>
+	<!-- Courses section end-->
+
+	<!-- Newsletter section end -->	
+
+
+{% endblock%}

@@ -1,0 +1,67 @@
+{% extends 'base.html' %}
+
+{% block title%}
+	Results
+{% endblock%}
+
+{% block content %}
+
+	<!-- Courses section -->
+	<section class="full-courses-section spad pt-0">
+		<br>
+		<div class="container">
+			<h2>Results</h2>
+			<br>
+			
+				<!-- course item -->
+			
+			{% for result in all_results%}
+
+			<ul>
+				<li><a href='{{ result.result_file.url}}'>{{result.result_title}}, - {{result.datepublished}}</a></li>
+			</ul>
+				
+				{% endfor %}
+			
+			</div>
+
+
+			<br><br>
+			<div class="text-center">
+				{% if all_results.has_other_pages %}
+  			<ul class="site-pageination">
+			    {% if all_results.has_previous %}
+			      <li><a href="?page={{ all_results.previous_page_number }}">&laquo;</a></li>
+			    {% else %}
+			      <li class="disabled"><span>&laquo;</span></li>
+			    {% endif %}
+			    {% for i in all_results.paginator.page_range %}
+			      {% if all_results.number == i %}
+			        <li class="active"><span>{{ i }} <span class="sr-only">(current)</span></span></li>
+			      {% else %}
+			        <li><a href="?page={{ i }}">{{ i }}</a></li>
+			      {% endif %}
+			    {% endfor %}
+			    {% if all_results.has_next %}
+			      <li><a href="?page={{ all_results.next_page_number }}">&raquo;</a></li>
+			    {% else %}
+			      <li class="disabled"><span>&raquo;</span></li>
+			    {% endif %}
+			  </ul>
+			{% endif %}
+			</div>
+
+
+
+
+
+
+			
+		
+	</section>
+	<!-- Courses section end-->
+
+	<!-- Newsletter section end -->	
+
+
+{% endblock%}

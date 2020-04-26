@@ -1,0 +1,190 @@
+
+<!-- Page Preloder -->
+	<div id="preloder">
+		<div class="loader"></div>
+	</div>
+
+	{% load static%}
+
+	<!-- header section -->
+	<header class="header-section">
+		<div class="container">
+			<!-- logo -->
+			<a href='{% url "home" %}' class="site-logo"><img src="/media/logo.png" alt="SNSEBS"></a>
+			<div class="nav-switch">
+				<i class="fa fa-bars"></i>
+			</div>
+			<div class="header-info">
+				<div class="hf-item">
+					<i class="fa fa-clock-o"></i>
+					<p><span>School time:</span>Sunday - Friday: 10 AM - 05 PM</p>
+				</div>
+				<div class="hf-item">
+					<i class="fa fa-map-marker"></i>
+					<p><span>Find us:</span>Gaindakot 1, Nawalpur, Nepal</p>
+				</div>
+			</div>
+		</div>
+	</header>
+	<!-- header section end-->
+
+
+<!-- Header section  -->
+	<div class="header" id="myHeader">
+	<nav class="nav-section">
+		<div class="container">
+			<div class="nav-right">
+				<input type="search" name="search" placeholder="Search any item..."><a href=""><i class="fa fa-search"></i></a>
+			</div>
+			<ul class="main-menu">
+				<li><a href='{% url "home" %}'>Home</a></li>
+				<li class="dropdown">
+				    <a href="javascript:void(0)" class="dropbtn">About Us<span class="caret"></span></a>
+				    <div class="dropdown-content">
+				      <a href='{% url "about_introduction" %}'>Introduction</a>
+				      <a href='{% url "about_boardofdirectors" %}'>Board of Directors</a>
+				      <a href='{% url "about_staffs" %}'>Teaching and Support Staffs</a>
+				      
+
+				    </div>
+				</li>
+
+
+				<li class="dropdown">
+				    <a href="javascript:void(0)" class="dropbtn">Programs<span class="caret"></span></a>
+				    <div class="dropdown-content">
+				      <a href=''>Pure Science Stream</a>
+				      <a href="">Computer Science Stream</a>
+				      <a href=''>Management Stream</a>
+				      <a href=''>Hotel Management Stream</a>
+				      <a href=''>Education Stream</a>
+				      
+
+				    </div>
+				</li>
+
+
+				<li><a href='{% url "event" %}'>Events</a></li>
+				<li><a href='{% url "notice" %}'>Notices</a></li>
+
+				<li class="dropdown">
+				    <a href="javascript:void(0)" class="dropbtn">Activities<span class="caret"></span></a>
+				    <div class="dropdown-content">
+				      <a href='{% url "activities_admissions" %}'>Admission(+2)</a>
+				      <a href='{% url "activities_results" %}'>Results</a>
+				     
+
+				    </div>
+				</li>
+
+				<li><a href='{% url "contact" %}'>Contact Us</a></li>
+				
+
+
+				
+    
+
+
+				
+			</ul>
+		</div>
+	</nav>
+</div>
+	<!-- Header section end -->
+
+
+
+
+
+
+
+
+<style type="text/css">
+
+
+/* The sticky class is added to the header with JS when it reaches its scroll position */
+
+.header{
+	z-index: 100
+}
+
+.sticky {
+  position: fixed;
+  top: 0;
+  width: 100%;
+}
+
+/* Add some top padding to the page content to prevent sudden quick movement (as the header gets a new position at the top of the page (position:fixed and top:0) */
+.sticky + .content {
+  padding-top: 102px;
+}
+
+
+
+
+
+
+
+li a, .dropbtn {
+    display: inline-block;
+    color: none;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+}
+
+li a:hover, .dropdown:hover .dropbtn {
+    background-color: #1dacd6;
+}
+
+li.dropdown {
+    display: inline-block;
+
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #87CEEB;
+    min-width: 100px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 2;
+}
+
+.dropdown-content a {
+    color: black;
+    padding: 14px 16px;
+    text-decoration: none;
+    display: block;
+    text-align: center;
+    width: 100%;
+}
+
+.dropdown-content a:hover {background-color: #f1f1f1}
+
+.dropdown:hover .dropdown-content {
+    display: block;
+
+
+</style>
+
+
+<script type="text/javascript">
+	window.onscroll = function() {myFunction()};
+
+// Get the header
+var header = document.getElementById("myHeader");
+
+// Get the offset position of the navbar
+var sticky = header.offsetTop;
+
+// Add the sticky class to the header when you reach its scroll position. Remove "sticky" when you leave the scroll position
+function myFunction() {
+  if (window.pageYOffset > sticky) {
+    header.classList.add("sticky");
+  } else {
+    header.classList.remove("sticky");
+  }
+} 
+</script>
+
