@@ -115,9 +115,9 @@ Saraswati Niketan - "Commited to Excellence"
 				<div class="col-lg-9">
 					<div class="section-title text-black">
 						<h3>MESSAGE FROM THE PRINCIPAL</h3>
-						<p>Today Education means much more than merely acquiring knowledge. It is the acquisition of knowledge and skills, building character and improving employability of our young talent, the future leadership. A pivotal role of education lies in shaping the personality of a child into a healthy mind and happy soul, who is not only equipped with 21st century skills and aptitude required for academic excellence but helping him face the challenges of life in a balanced and harmonious way. Therefore, the system of education should work as a catalyst in making each child a balanced human being having his core strengths embedded in the learning experiences emanating from our rich socio-cultural roots.
+						<h7>I have the pleasure to welcome you to our institution at the commencement of the new session. The college administration and the teaching faculty is committed to guide the students to accomplish their best possible faculties for an overall development along with co-curricular and extra curricular activities.</h7>
 
-</p>
+
 					</div>
 					<!-- <div class="enroll-list text-white">
 						<div class="enroll-list-item">
@@ -303,9 +303,9 @@ Saraswati Niketan - "Commited to Excellence"
 			<div class="row">
 				{% for event in all_events%}
 				<a href="{% url 'single_event' id=event.id %}">
-				<div class="col-md-6 event-item">
+				<div class="col-md-3 event-item">
 					<div class="event-thumb">
-						<img src='{{ event.event_thumbnail.url}}' alt="{{ event.event_thumbnail.url}}" width="200px" height="200px">
+						<img src='{{ event.event_thumbnail.url}}' alt="{{ event.event_thumbnail.url}}" width="200px" height="200px" class="rounded">
 						<div class="event-date">
 							<span>{{event.event_date}}</span>
 						</div>

@@ -1,9 +1,10 @@
-from django.shortcuts import render
-from .models import IndexImage, Notice, Event, Teacher, BoardofDirector, Result
+from django.shortcuts import render, redirect, get_object_or_404
+from .models import IndexImage, Notice, Event, Staff, BoardofDirector, Result, Gallery, GalleryImage
 from django.http import HttpResponse, FileResponse, Http404
 from django.core.paginator import Paginator
 from django.core.exceptions import ObjectDoesNotExist
 from django.conf import settings
+from .forms import ContactMessageForm
 import os
 # Create your views here.
 
@@ -11,7 +12,7 @@ def home(request):
 
 	images = IndexImage.objects.filter(active=1).order_by('-id')[:4]
 	notices = Notice.objects.filter().order_by('-id')[:10]
-	events = Event.objects.filter().order_by('-id')[:2]
+	events = Event.objects.filter().order_by('-id')[:4]
 	template = 'schools/index.html'
 	context = {'all_images': images, 'all_notices':notices,'all_events':events}
 	return render(request, template, context)
@@ -23,7 +24,7 @@ def home(request):
 
 def about_introduction(request):
 	try:
-		images = IndexImage.objects.filter(active=1)[:1]
+		images = IndexImage.objects.filter(active=1).order_by('-id')[:1]
 		template = 'schools/about_introduction.html'
 		context = {'all_images':images}
 		return render(request,template,context)
@@ -44,9 +45,10 @@ def about_boardofdirectors(request):
 
 def about_staffs(request):
 	try:
-		staffs = Teacher.objects.all()
+		teaching_staffs = Staff.objects.filter(staff_type="teaching")
+		non_teaching_staffs = Staff.objects.filter(staff_type="non_teaching")
 		template = 'schools/about_staffs.html'
-		context = {'all_staffs':staffs}
+		context = {'teaching_staffs':teaching_staffs, 'non_teaching_staffs':non_teaching_staffs}
 		return render(request, template, context)
 	except:
 		raise Http404("Page Not Found")
@@ -102,6 +104,15 @@ def activities_admissions(request):
 		raise Http404("Page not Found")
 
 
+def activities_facilities(request):
+	try:
+		template = 'schools/activities_facilities.html'
+		context = {}
+		return render(request,template,context)
+	except:
+		raise Http404("Page Not Found")
+
+
 
 def activities_results(request):
 	try:
@@ -123,14 +134,50 @@ def activities_results(request):
 
 
 
+def gallery(request):
+	template = 'schools/gallery.html'
+	gallery = Gallery.objects.all().order_by('-id')
+	context = {'my_gallery':gallery}
+	return render(request, template, context)
+
+
+def gallerydetail(request,id):
+	gallery = get_object_or_404(Gallery,id=id)
+	images = GalleryImage.objects.filter(gallery=gallery)
+	template = 'schools/gallerydetail.html'
+	context = {'my_gallery':gallery,'my_images':images}
+	return render(request,template,context)
+
+
+
+
 
 def contact(request):
 	try:
 		template = 'schools/contact.html'
-		context = {}
+		form = ContactMessageForm()
+		context = {'form':form}
 		return render(request, template, context)
 	except:
 		raise Http404("Post not found")
+
+
+def contactmessage(request):
+	try:
+		if request.method == "POST":
+			form = ContactMessageForm(request.POST)
+			if form.is_valid():
+				form.save()
+				return redirect('/contact/')
+			form = ContactMessageForm()
+		else:
+			return redirect('/contact/')
+	except:
+		raise Http404("Page Not Found")
+
+	# form = ContactMessageForm()
+	# return render(request, template, {})
+
 
 
 

@@ -14,26 +14,56 @@
 	<section class="team-section spad">
 		<div class="container">
 			<div class="section-title text-center">
-				<h4>Teaching and Support Staffs</h4>
+				<h4>Teaching Staffs</h4>
 			</div>
 			<div class="row">
-				{% for staff in all_staffs %}
+				{% for staff in teaching_staffs %}
 				<div class="col-md-6 col-lg-3">
 					<div class="member">
-						<div class="member-pic set-bg" data-setbg='{{ staff.teacher_image.url}}'>
+						<div class="member-pic set-bg" data-setbg='{{ staff.staff_image.url}}'>
 							<!-- <div class="member-social">
 								<a href=""><i class="fa fa-facebook"></i></a>
 								<a href=""><i class="fa fa-twitter"></i></a>
 								<a href=""><i class="fa fa-pinterest"></i></a>
 							</div> -->
 						</div>
-						<h5>{{staff.teacher_name}}</h5>
-						<p>{{staff.teacher_designation}}</p>
+						<h5>{{staff.staff_name}}</h5>
+						<p>{{staff.staff_designation}}</p>
+						<p>Contact No.- {{staff.staff_telephone}}</p>
+						<br>
 					</div>
 				</div>
 				{%endfor%}
 			
 			</div>
+
+			<br>
+
+
+			<div class="section-title text-center">
+				<h4>Non-Teaching Staffs</h4>
+			</div>
+			<div class="row">
+				{% for staff in non_teaching_staffs %}
+				<div class="col-md-6 col-lg-3">
+					<div class="member">
+						<div class="member-pic set-bg" data-setbg='{{ staff.staff_image.url}}'>
+							<!-- <div class="member-social">
+								<a href=""><i class="fa fa-facebook"></i></a>
+								<a href=""><i class="fa fa-twitter"></i></a>
+								<a href=""><i class="fa fa-pinterest"></i></a>
+							</div> -->
+						</div>
+						<h5>{{staff.staff_name}}</h5>
+						<p>{{staff.staff_designation}}</p>
+						<p>Contact No.- {{staff.staff_telephone}}</p>
+						<br>
+					</div>
+				</div>
+				{%endfor%}
+			
+			</div>
+
 		</div>
 	</section>
 	<!-- Team section end -->

@@ -37,9 +37,10 @@ Contact
 				<div class="section-title text-center">
 					<h4>Contact us for any queries</h4>
 				</div>
-				<form class="comment-form --contact">
+				<form class="comment-form --contact" method="POST" action='{% url "contactmessage" %}'>
+					{% csrf_token %}
 					<div class="row">
-						<div class="col-lg-4">
+					<!-- 	<div class="col-lg-4">
 							<input type="text" placeholder="Your Name">
 						</div>
 						<div class="col-lg-4">
@@ -47,11 +48,11 @@ Contact
 						</div>
 						<div class="col-lg-4">
 							<input type="text" placeholder="Subject">
-						</div>
+						</div> -->
+						{{form}}
 						<div class="col-lg-12">
-							<textarea placeholder="Message"></textarea>
 							<div class="text-center">
-								<button class="site-btn">SUBMIT</button>
+								<button class="site-btn btn-success">SUBMIT</button>
 							</div>
 						</div>
 					</div>

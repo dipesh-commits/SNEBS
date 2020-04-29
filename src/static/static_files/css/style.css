@@ -315,7 +315,7 @@ ol {
 
 .nav-section .nav-right {
 	float: right;
-	padding-top: 23px;
+	padding-top: 14px;
 }
 
 .nav-section .nav-right a {
@@ -1759,7 +1759,7 @@ ol {
 		display: none;
 	}
 	.site-logo {
-		padding: 15px 0;
+		padding: 20px 0;
 	}
 	.nav-switch {
 		position: absolute;
@@ -1773,7 +1773,7 @@ ol {
 		display: block;
 		float: none;
 		text-align: right;
-		padding-bottom: 20px;
+		padding-bottom: 30px;
 	}
 	.main-menu {
 		display: none;

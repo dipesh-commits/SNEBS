@@ -15,11 +15,11 @@
 				<!-- course item -->
 			{% for event in all_events%}
 				
-				<div class="col-md-6 event-item">
+				<div class="col-md-3 event-item">
 					<a href="{% url 'single_event' event.id %}">
 					<div class="event-thumb">
 						
-						<img src='{{ event.event_thumbnail.url}}' alt="{{ event.event_thumbnail.url}}" width="200px" height="200px">
+						<img src='{{ event.event_thumbnail.url}}' alt="{{ event.event_thumbnail.url}}" width="200px" height="200px" class="rounded">
 						<div class="event-date">
 							<span>{{event.event_date}}</span>
 						</div>
