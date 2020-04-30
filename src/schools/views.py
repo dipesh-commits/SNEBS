@@ -1,10 +1,12 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from .models import IndexImage, Notice, Event, Staff, BoardofDirector, Result, Gallery, GalleryImage
+from django.db.models import Q
 from django.http import HttpResponse, FileResponse, Http404
 from django.core.paginator import Paginator
 from django.core.exceptions import ObjectDoesNotExist
 from django.conf import settings
 from .forms import ContactMessageForm
+from django.contrib import messages
 import os
 # Create your views here.
 
@@ -150,6 +152,39 @@ def gallerydetail(request,id):
 
 
 
+def search(request):
+	template = 'schools/search.html'
+	if request.method == "GET":
+		query = request.GET['query']	
+		print(query)
+		if query:
+			match_notices = Notice.objects.filter(Q(Notice._meta.object_name__icontains=query) | Q(notice_title__icontains=query)|
+										 Q(notice_description__icontains=query)
+										 )
+			match_events = Event.objects.filter(Q(event_title__icontains=query) |
+												Q(event_details__icontains=query)|
+												Q(event_location__icontains = query)
+												)
+			match_staffs = Staff.objects.filter(Q(staff_name__icontains = query) |
+												Q(staff_designation__icontains=query) 
+												)
+			match_directors = BoardofDirector.objects.filter(Q(director_name__icontains= query) |
+															 Q(director_designation__icontains=query) 
+															 )
+			match_results = Result.objects.filter(Q(result_title__icontains=query) 
+													)
+			match_gallery = Gallery.objects.filter(Q(gallery_name__icontains=query) 
+														)
+			if match_notices or match_events or match_staffs or match_directors or match_results or match_gallery:
+				context = {'match_notices':match_notices,'match_events':match_events,'match_staffs':match_staffs,
+				'match_directors':match_directors,'match_results':match_results,'match_gallery':match_gallery}
+				return render(request,template,context)
+			else:
+				messages.error(request,'No search results found')
+		else:
+			return HttpResponseRedirect('search/')
+	
+	return render(request, template)
 
 
 def contact(request):

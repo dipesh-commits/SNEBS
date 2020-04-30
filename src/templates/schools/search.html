@@ -1,0 +1,235 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Search
+{% endblock %}
+
+
+{% block content %}
+
+
+	{% load static%}
+
+
+
+{% if match_notices %}
+
+				<!-- Courses section -->
+<section class="full-courses-section spad pt-0">
+		<br>
+		<div class="container">
+			<h2>Notices</h2>
+			<br>
+			
+				<!-- course item -->
+			
+			{% for notice in match_notices%}
+
+			<ul>
+				<li><a href='{{ notice.notice_file.url}}'>{{notice.notice_title}}, - {{notice.datepublished}}</a></li>
+			</ul>
+				
+				{% endfor %}
+			
+			</div>
+
+
+			<br><br>
+		
+		
+		
+	</section>
+
+	{% endif %}
+
+
+
+	{% if match_events %}
+
+			<section class="full-courses-section spad pt-0">
+		<br>
+		<div class="container">
+			<h2 class="text-center">EVENTS</h2><br>
+			<div class="row">
+				<!-- course item -->
+			{% for event in match_events%}
+				
+				<div class="col-md-3 event-item">
+					<a href="{% url 'single_event' event.id %}">
+					<div class="event-thumb">
+						
+						<img src='{{ event.event_thumbnail.url}}' alt="{{ event.event_thumbnail.url}}" width="200px" height="200px" class="rounded">
+						<div class="event-date">
+							<span>{{event.event_date}}</span>
+						</div>
+					</div>
+					</a>
+					<div class="event-info">
+						<h4>{{event.event_title}}</h4>
+						
+						<p><i class="fa fa-calendar-o"></i> {{event.event_time}} <i class="fa fa-map-marker"></i> {{event.event_location}}</p>
+						<!-- <a href="" class="event-readmore">REGISTER <i class="fa fa-angle-double-right"></i></a> -->
+
+					</div>
+				</div>
+				
+				{% endfor %}
+			</div>
+		</div>
+
+		
+	</section>
+
+	{% endif%}
+
+
+
+
+
+{% if match_directors %}
+
+	<section class="team-section spad">
+		<div class="container">
+			<div class="section-title text-center">
+				<h4>Board of Directors</h4>
+			</div>
+			<div class="row">
+				{% for director in match_directors %}
+				<div class="col-md-6 col-lg-3">
+					<div class="member">
+						<div class="member-pic set-bg" data-setbg='{{ director.director_image.url}}'>
+							<!-- <div class="member-social">
+								<a href=""><i class="fa fa-facebook"></i></a>
+								<a href=""><i class="fa fa-twitter"></i></a>
+								<a href=""><i class="fa fa-pinterest"></i></a>
+							</div> -->
+						</div>
+						<h5>{{director.director_name}}</h5>
+						<p>{{director.director_designation}}</p>
+						<p>Contact No. - {{director.director_telephone}}</p>
+						<br>
+					</div>
+				</div>
+				{%endfor%}
+			
+			</div>
+		</div>
+	</section>
+
+{% endif %}
+
+{% if match_staffs %}
+
+
+<section class="team-section spad">
+		<div class="container">
+			<div class="section-title text-center">
+				<h4>Teaching Staffs</h4>
+			</div>
+			<div class="row">
+				{% for staff in match_staffs %}
+				<div class="col-md-6 col-lg-3">
+					<div class="member">
+						<div class="member-pic set-bg" data-setbg='{{ staff.staff_image.url}}'>
+							<!-- <div class="member-social">
+								<a href=""><i class="fa fa-facebook"></i></a>
+								<a href=""><i class="fa fa-twitter"></i></a>
+								<a href=""><i class="fa fa-pinterest"></i></a>
+							</div> -->
+						</div>
+						<h5>{{staff.staff_name}}</h5>
+						<p>{{staff.staff_designation}}</p>
+						<p>Contact No.- {{staff.staff_telephone}}</p>
+						<br>
+					</div>
+				</div>
+				{%endfor%}
+			
+			</div>
+
+			<br>
+
+
+		</div>
+	</section>
+
+{% endif %}
+
+
+
+{% if match_results%}
+<section class="full-courses-section spad pt-0">
+		<br>
+		<div class="container">
+			<h2>Results</h2>
+			<br>
+			
+				<!-- course item -->
+			
+			{% for result in match_results%}
+
+			<ul>
+				<li><a href='{{ result.result_file.url}}'>{{result.result_title}}, - {{result.datepublished}}</a></li>
+			</ul>
+				
+				{% endfor %}
+			
+			</div>
+			
+		
+	</section>
+{% endif %}
+
+
+{% if match_gallery %}
+
+	<section class="full-courses-section spad pt-0">
+		<br>
+		<div class="container">
+			 <div class="row">
+        <div class="gallery col-lg-12 col-md-12 col-sm-12 col-xs-12">
+            <h1 class="gallery-title">Gallery</h1>
+        </div>
+
+        <br/>
+
+
+        	{% for gallery in match_gallery%}
+            <div class="gallery_product col-lg-4 col-md-4 col-sm-4 col-xs-6 filter hdpe">
+            	<a href="{% url 'gallerydetail' gallery.id%}">
+                <img src='{{gallery.gallery_image.url}}' class="img-responsive rounded">
+                <div class="box_data">
+			<span class="text-center">{{gallery.gallery_name}}</span>
+			</div>
+		</a>
+            </div>
+
+            {% endfor %}
+
+           
+
+        
+        </div>
+
+
+
+
+
+			
+			</div>
+
+
+
+
+
+
+
+			
+		
+	</section>
+
+{% endif %}
+
+
+
+{% endblock %}

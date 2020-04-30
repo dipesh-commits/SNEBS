@@ -107,6 +107,7 @@ class Gallery(models.Model):
 	updated = models.DateTimeField(auto_now_add=False,auto_now=True)
 
 
+
 	def __str__(self):
 		return self.gallery_name
 

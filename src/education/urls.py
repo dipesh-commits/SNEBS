@@ -20,10 +20,12 @@ urlpatterns = [
     path('contact/',views.contact, name="contact"),
     path('contactmessage/',views.contactmessage, name="contactmessage"),
     path('gallery/', views.gallery, name="gallery"),
-    path('gallerydetail/<int:id>',views.gallerydetail,name='gallerydetail'),
+    path('search/',views.search, name="search"),
 
     path('events/<int:id>/',views.single_event,name="single_event"),
     path('notices/<int:id>/',views.single_notice, name="single_notice"),
+    path('gallerydetail/<int:id>',views.gallerydetail,name='gallerydetail'),
+
 
     path('admin/', admin.site.urls),
  ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
